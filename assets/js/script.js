@@ -38,8 +38,21 @@ function runGame(gameType) {
 function checkAnswer() {
 
 }
-
+/**
+ * Gets the operands(num1 and num2) and the operator(+,-,*,/)
+ * directly from the DOM and returns the correct answer.
+ */
 function calculateCorrecrAnswer() {
+    let operand1 = parseInt(document.getElementById("operand1").textContent);
+    let operand2 = parseInt(document.getElementById("operand2").textContent);
+    let operator = document.getElementById("operand").innerText;
+
+    if (operator === "+"){
+        return [operand1 + operand2, "addition"];
+    }else{
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}! Aborting!`;
+    }
 
 }
 
