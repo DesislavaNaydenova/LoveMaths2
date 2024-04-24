@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
     for (let button of buttons){
         button.addEventListener("click", function(){
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked Submit");
+                checkAnswer();
             }else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -34,8 +34,21 @@ function runGame(gameType) {
     }
 
 }
-
+/**
+ * Gets the users Guess and compres it to the first element 
+ * in the array returned from the calculateCorrectAnswer function
+ */
 function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrecrAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (isCorrect) {
+        alert("You got this right!");
+    }else {
+        alert(`You answered ${userAnswer} and the correct answer was ${calculatedAnswer[0]}!`);
+    }
+    runGame(calculatedAnswer[1]);
 
 }
 /**
@@ -45,7 +58,7 @@ function checkAnswer() {
 function calculateCorrecrAnswer() {
     let operand1 = parseInt(document.getElementById("operand1").textContent);
     let operand2 = parseInt(document.getElementById("operand2").textContent);
-    let operator = document.getElementById("operand").innerText;
+    let operator = document.getElementById("operator").innerText;
 
     if (operator === "+"){
         return [operand1 + operand2, "addition"];
